@@ -1,0 +1,516 @@
+{
+  "unit_number": 2,
+  "unit_title": "お金の体力測定",
+  "sections": [
+    {
+      "title": "家計の把握",
+      "status": "public",
+      "lessons": [
+        {
+          "title": "ウォームアップ",
+          "status": "public",
+          "goal": "家計の基礎知識を確認する",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "warmup",
+              "input": {
+                "body": "これから家計の把握について学びます。\nまずは基礎知識をクイズで確認してみましょう。",
+                "supplement": "間違えても大丈夫。復習のチャンスです",
+                "question_text": "",
+                "options": [],
+                "correct_option": "",
+                "result_comment": ""
+              },
+              "quiz": {
+                "question": "家計管理の第一歩は収支の把握？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "正解！収入と支出を把握することが、家計管理の基本です。何にいくら使っているか知ることで、改善点が見えてきますよ。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "warmup",
+              "input": {
+                "body": "もう一問確認してみましょう。",
+                "supplement": "",
+                "question_text": "",
+                "options": [],
+                "correct_option": "",
+                "result_comment": ""
+              },
+              "quiz": {
+                "question": "投資は家計に余裕がなくても始めるべき？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "まず生活費と緊急資金を確保してから投資を始めましょう。余裕のない状態での投資は、精神的な負担が大きく、冷静な判断ができなくなる恐れがあります。"
+              }
+            }
+          ]
+        },
+        {
+          "title": "収入と支出の基本",
+          "status": "public",
+          "goal": "収入と支出の全体像を把握する",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "家計管理の第一歩は、毎月「入ってくるお金」と「出ていくお金」を把握することです。\n給料、副業収入、年金などが収入。家賃、食費、光熱費などが支出です。",
+                "supplement": "まずは大まかでOK。だんだん詳しくしていけます",
+                "question_text": "家計管理で最初にすべきことは？",
+                "options": ["収支の把握", "投資を始める"],
+                "correct_option": "収支の把握",
+                "result_comment": "正解！まず収支を知ることが、すべての始まりです。"
+              },
+              "quiz": {
+                "question": "収入より支出が多い状態は健全？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "収入より支出が多いと赤字になり、貯蓄ができません。継続すると借金が増える可能性もあります。まず支出を見直して、収入の範囲内で生活することが大切です。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "収入から支出を引いた金額が「余剰資金」です。\nこれがプラスなら貯蓄や投資に回せます。マイナスなら支出の見直しが必要です。",
+                "supplement": "余剰資金を増やすことが家計改善の鍵",
+                "question_text": "余剰資金とは何？",
+                "options": ["収入から支出を引いた金額", "給料の全額"],
+                "correct_option": "収入から支出を引いた金額",
+                "result_comment": "正解！この余剰資金が、将来の資産形成の元になります。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "固定費と変動費とは",
+          "status": "public",
+          "goal": "支出を固定費と変動費に分ける",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "支出は「固定費」と「変動費」に分けられます。\n固定費は毎月ほぼ同じ金額（家賃、保険料、通信費など）。変動費は月ごとに変わる費用（食費、娯楽費など）です。",
+                "supplement": "固定費の見直しが節約の近道",
+                "question_text": "毎月ほぼ同じ金額の支出を何という？",
+                "options": ["固定費", "変動費"],
+                "correct_option": "固定費",
+                "result_comment": "正解！固定費を見直すと、継続的な節約効果が得られます。"
+              },
+              "quiz": {
+                "question": "食費は固定費に分類される？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "食費は月によって変わるため、変動費に分類されます。外食が多い月は高く、自炊が多い月は安くなりますよね。変動費は意識次第で調整しやすい支出です。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "固定費を下げると、毎月自動的に節約できます。\n格安スマホへの乗り換え、不要なサブスクの解約などが効果的です。",
+                "supplement": "一度見直せば継続的に効果が出ます",
+                "question_text": "固定費削減の効果は？",
+                "options": ["継続的に節約できる", "一時的な効果だけ"],
+                "correct_option": "継続的に節約できる",
+                "result_comment": "その通り！固定費削減は、長期的な家計改善につながります。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "予算管理のコツ",
+          "status": "public",
+          "goal": "費目ごとに予算を決める方法を学ぶ",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "予算管理とは、費目ごとに「今月はここまで」と上限を決めること。\n食費3万円、娯楽費1万円など、使いすぎを防ぐ目安を設定します。",
+                "supplement": "予算は無理のない範囲で設定しましょう",
+                "question_text": "予算管理の目的は？",
+                "options": ["使いすぎを防ぐ", "収入を増やす"],
+                "correct_option": "使いすぎを防ぐ",
+                "result_comment": "正解！予算を決めることで、計画的にお金を使えます。"
+              },
+              "quiz": {
+                "question": "予算は一度決めたら絶対に変えてはいけない？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "予算は柔軟に見直してOKです。生活環境が変われば、必要な金額も変わります。無理な予算で我慢しすぎると続きません。定期的に見直して、実情に合わせましょう。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "予算を守るコツは、家計簿アプリを使うこと。\n自動で支出を記録してくれるので、手間なく管理できます。",
+                "supplement": "最初は簡単な方法から始めましょう",
+                "question_text": "家計簿アプリの利点は？",
+                "options": ["自動で支出を記録", "収入が増える"],
+                "correct_option": "自動で支出を記録",
+                "result_comment": "正解！アプリを使えば、楽に家計管理が続けられます。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "セクションチャレンジ",
+          "status": "public",
+          "goal": "家計の把握の復習",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "challenge",
+              "input": {
+                "body": "ここまでの内容を復習しましょう。\n家計管理の基本をしっかり理解できているか確認してください。",
+                "supplement": "復習は学びを深めるチャンスです",
+                "question_text": "家計管理で最も大切なことは？",
+                "options": ["収支を把握すること", "高額な買い物をすること"],
+                "correct_option": "収支を把握すること",
+                "result_comment": "正解！収支を知ることが、すべての基本です。"
+              },
+              "quiz": {
+                "question": "固定費の見直しは効果が持続する？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "その通り！固定費を一度下げれば、毎月自動的に節約できます。通信費、保険料、サブスクなど、見直せるものがないか確認してみましょう。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "challenge",
+              "input": {
+                "body": "最後の確認問題です。",
+                "supplement": "",
+                "question_text": "予算管理の目的として正しいのは？",
+                "options": ["使いすぎを防ぐ", "収入を2倍にする"],
+                "correct_option": "使いすぎを防ぐ",
+                "result_comment": "正解！予算を決めることで、計画的な支出が実現します。"
+              },
+              "quiz": {
+                "question": "家計簿アプリは管理を楽にする？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "正解です！アプリなら自動で支出を記録してくれるので、手間が減って続けやすくなります。まずは簡単な方法から始めて、家計管理の習慣を作りましょう。お疲れさまでした！"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "投資にまわせるお金",
+      "status": "public",
+      "lessons": [
+        {
+          "title": "生活防衛資金とは",
+          "status": "public",
+          "goal": "生活防衛資金の考え方を知る",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "生活防衛資金とは、病気やケガ、失業など「もしもの時」に生活を守るための貯え。\n投資を始める前に、必ず確保しておきましょう。",
+                "supplement": "安心の土台を作ることが第一歩",
+                "question_text": "生活防衛資金の役割は？",
+                "options": ["緊急時の備え", "投資資金"],
+                "correct_option": "緊急時の備え",
+                "result_comment": "正解！もしもの時に慌てないための大切な備えです。"
+              },
+              "quiz": {
+                "question": "生活防衛資金がなくても投資していい？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "生活防衛資金がないまま投資を始めると、急な出費で投資資金を取り崩すことになり、最悪の場合は損失を確定させてしまいます。まず備えを作りましょう。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "生活防衛資金は「すぐに使える形」で持つことが大切。\n普通預金や定期預金など、換金性の高い方法で確保しましょう。",
+                "supplement": "投資に回すのはこの資金を除いた後",
+                "question_text": "生活防衛資金の保管方法として適切なのは？",
+                "options": ["普通預金", "株式投資"],
+                "correct_option": "普通預金",
+                "result_comment": "正解！すぐに引き出せる形で持つことが重要です。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "防衛資金はいくら必要",
+          "status": "public",
+          "goal": "生活防衛資金の目安を理解する",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "生活防衛資金の目安は「生活費の3〜6ヶ月分」。\n月20万円で生活しているなら、60〜120万円が目安です。",
+                "supplement": "働き方や家族構成によって調整しましょう",
+                "question_text": "生活防衛資金の一般的な目安は？",
+                "options": ["生活費の3〜6ヶ月分", "年収の全額"],
+                "correct_option": "生活費の3〜6ヶ月分",
+                "result_comment": "正解！これが基本の目安です。"
+              },
+              "quiz": {
+                "question": "フリーランスは会社員より多めに備えるべき？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "その通りです！フリーランスは収入が不安定なため、会社員より多め（6ヶ月〜1年分）の生活防衛資金があると安心です。雇用保険もないので、備えが重要です。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "家族がいる場合や、住宅ローンがある場合は、多めに確保すると安心です。\n自分の状況に合わせて、目安を調整しましょう。",
+                "supplement": "不安があるなら多めに持つのもOK",
+                "question_text": "生活防衛資金の金額は状況で変える？",
+                "options": ["はい", "いいえ"],
+                "correct_option": "はい",
+                "result_comment": "正解！自分の状況に合わせて調整することが大切です。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "投資余力の計算方法",
+          "status": "public",
+          "goal": "無理のない投資額を計算する",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "投資に回せるお金は「収入 − 生活費 − 生活防衛資金への積立」で計算します。\n毎月の余剰資金から、無理のない金額を投資に回しましょう。",
+                "supplement": "少額でも続けることが大切",
+                "question_text": "投資余力の計算式で正しいのは？",
+                "options": ["収入−生活費−貯蓄", "収入の全額"],
+                "correct_option": "収入−生活費−貯蓄",
+                "result_comment": "正解！生活を守った上で、余った分を投資に回します。"
+              },
+              "quiz": {
+                "question": "投資は大金がないと始められない？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "投資は少額からでも始められます。月3000円や5000円でも、積立投資なら十分です。大切なのは金額ではなく、続けることです。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "投資額は無理のない範囲で設定しましょう。\n「なくなっても生活に支障がない金額」が基本です。",
+                "supplement": "ライフステージに応じて見直しもOK",
+                "question_text": "投資額の決め方で正しいのは？",
+                "options": ["なくなっても大丈夫な金額", "給料の全額"],
+                "correct_option": "なくなっても大丈夫な金額",
+                "result_comment": "正解！無理のない範囲で続けることが成功の鍵です。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "セクションチャレンジ",
+          "status": "public",
+          "goal": "投資余力の理解を深める",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "challenge",
+              "input": {
+                "body": "セクションの内容を復習しましょう。\n生活防衛資金と投資余力について、しっかり理解できているか確認してください。",
+                "supplement": "自分の家計に当てはめて考えてみましょう",
+                "question_text": "投資を始める前に必ず確保すべきものは？",
+                "options": ["生活防衛資金", "高級な腕時計"],
+                "correct_option": "生活防衛資金",
+                "result_comment": "正解！まず緊急時の備えを作ることが大切です。"
+              },
+              "quiz": {
+                "question": "生活防衛資金の目安は生活費の3〜6ヶ月分？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "その通りです！この金額があれば、急な失業や病気にも対応できます。安心して投資を続けるための土台になりますよ。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "challenge",
+              "input": {
+                "body": "最後の確認問題です。",
+                "supplement": "",
+                "question_text": "投資に回すべき金額として正しいのは？",
+                "options": ["余裕資金", "生活費全部"],
+                "correct_option": "余裕資金",
+                "result_comment": "正解！生活を守った上で、余った分を投資に回しましょう。"
+              },
+              "quiz": {
+                "question": "少額でも積立投資は有効？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "正解です！月3000円でも、10年続ければ立派な資産に育ちます。大切なのは金額ではなく、継続することです。無理のない範囲で始めましょう。お疲れさまでした！"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "投資のゴール設定",
+      "status": "public",
+      "lessons": [
+        {
+          "title": "目標設定の重要性",
+          "status": "public",
+          "goal": "投資の目標を明確にする大切さを学ぶ",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "投資には「何のために」「いつまでに」「いくら」という3つの軸が必要です。\n目標が明確だと、途中で迷わず続けられます。",
+                "supplement": "漠然と始めるより、目標があると強い",
+                "question_text": "投資の目標設定に必要な3つの軸は？",
+                "options": ["目的・期限・金額", "銘柄・タイミング・運"],
+                "correct_option": "目的・期限・金額",
+                "result_comment": "正解！この3つを決めると、計画が明確になります。"
+              },
+              "quiz": {
+                "question": "目標がないまま投資を始めても大丈夫？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "目標がないと、途中で不安になったり、目的のない売買を繰り返したりしがちです。「老後資金のために20年で1000万円」など、明確な目標があると続けやすくなります。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "目標の例：「10年後の子どもの大学資金として300万円を作る」\n「30年後の老後資金として2000万円を用意する」など、具体的に決めましょう。",
+                "supplement": "途中で変わってもOK。見直しながら進みましょう",
+                "question_text": "投資目標の設定で大切なことは？",
+                "options": ["具体的に決める", "曖昧にしておく"],
+                "correct_option": "具体的に決める",
+                "result_comment": "正解！具体的な目標が、モチベーションを保つ秘訣です。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "利回りとは",
+          "status": "public",
+          "goal": "利回りの意味と見方を理解する",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "input_quiz",
+              "input": {
+                "body": "利回りとは「投資したお金が1年でどれくらい増えたか」を示す割合です。\n年利3%なら、100万円が1年で103万円になる計算です。",
+                "supplement": "利回りが高いほど、リスクも高い傾向",
+                "question_text": "年利3%の投資で100万円は1年後いくら？",
+                "options": ["103万円", "130万円"],
+                "correct_option": "103万円",
+                "result_comment": "正解！3%の成長を理解できていますね。"
+              },
+              "quiz": {
+                "question": "利回りが高い投資は必ず安全？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "x",
+                "explanation": "利回りが高い投資は、それだけリスクも高い傾向があります。高いリターンを狙うほど、値動きも大きくなり、損失の可能性も増えます。バランスが大切です。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "input_quiz",
+              "input": {
+                "body": "投資信託の平均的な利回りは年3〜5%程度。\n無理に高い利回りを狙わず、長期でコツコツ増やす方が安全です。",
+                "supplement": "短期の高利回りより、長期の安定が大切",
+                "question_text": "投資信託の平均利回りはどれくらい？",
+                "options": ["年3〜5%", "年50%"],
+                "correct_option": "年3〜5%",
+                "result_comment": "正解！現実的な目標を持つことが成功の鍵です。"
+              },
+              "quiz": null
+            }
+          ]
+        },
+        {
+          "title": "セクションチャレンジ",
+          "status": "public",
+          "goal": "目標設定と利回りの理解確認",
+          "pages": [
+            {
+              "page_no": 1,
+              "type": "challenge",
+              "input": {
+                "body": "セクションの内容を復習しましょう。\n投資のゴール設定と利回りについて、理解できているか確認してください。",
+                "supplement": "自分の目標を考えながら復習しましょう",
+                "question_text": "投資目標に必要な要素として正しいのは？",
+                "options": ["目的・期限・金額", "運と直感"],
+                "correct_option": "目的・期限・金額",
+                "result_comment": "正解！この3つが揃えば、計画的に投資できます。"
+              },
+              "quiz": {
+                "question": "利回りは投資の成績を示す指標？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "その通り！利回りを見れば、投資がどれくらい成長したかが分かります。ただし、過去の利回りが未来も続く保証はありません。参考にしながら、慎重に判断しましょう。"
+              }
+            },
+            {
+              "page_no": 2,
+              "type": "challenge",
+              "input": {
+                "body": "最後の確認問題です。",
+                "supplement": "",
+                "question_text": "高い利回りの投資は必ず安全？",
+                "options": ["いいえ", "はい"],
+                "correct_option": "いいえ",
+                "result_comment": "正解！高利回りには高リスクが伴います。"
+              },
+              "quiz": {
+                "question": "投資は明確な目標があると続けやすい？",
+                "type": "2_choice",
+                "options": ["o", "x"],
+                "correct_value": "o",
+                "explanation": "正解です！「何のために」「いつまでに」「いくら」という目標があれば、迷わず続けられます。人生の大切なイベントに向けて、今日から準備を始めましょう。お疲れさまでした！"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
