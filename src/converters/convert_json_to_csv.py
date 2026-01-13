@@ -2,45 +2,42 @@ import json
 import pandas as pd
 import os
 import shutil
+import csv
 
 # --- 設定 ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # src/converters/
-PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR)) # root/
+# 実行場所に応じてパスを調整してください
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR)) # src/converters/.. -> root
+# もし src/ 直下に置くなら PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
 INPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'drafts_json')
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'output_csv')
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'output_csv')
 TEMPLATE_FILE = os.path.join(PROJECT_ROOT, 'templates', 'header_template.csv')
 
 def get_virtual_date_id(unit_num, prefix, counter):
-    """
-    Unit番号に基づいて仮想日付を生成し、IDを作成する
-    Unit 1 -> 250101 (25年1月1日)
-    Unit 12 -> 250112 (25年1月12日)
-    """
-    # 仮想日付の生成: 2501 + Unit番号(2桁)
+    """Unit番号に基づいて仮想日付IDを生成"""
     virtual_date = f"2501{str(unit_num).zfill(2)}"
-    # ID生成: Prefix + Date + 連番(4桁)
     return f"{prefix}{virtual_date}{str(counter).zfill(4)}"
 
 def generate_csv_final(json_filename):
-    # 1. JSON読み込み
     json_path = os.path.join(INPUT_DIR, json_filename)
     if not os.path.exists(json_path):
-        print(f"エラー: {json_path} が見つかりません。")
-        return
+        # パスが見つからない場合のフォールバック（カレントディレクトリ基準）
+        json_path = os.path.join('data/drafts_json', json_filename)
+        if not os.path.exists(json_path):
+            print(f"エラー: {json_path} が見つかりません。")
+            return
 
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    unit_num = data.get('unit_number', 1) # JSONに番号がない場合は1とする
+    unit_num = data.get('unit_number', 1)
     print(f"処理中: Unit {unit_num} ({json_filename})")
 
-    # IDカウンターのリセット
     cnt = {'S': 0, 'L': 0, 'I': 0, 'Q': 0}
-    
     rows = []
     
-    # 2. データ構築ループ
+    # --- データの構築 ---
     for section in data['sections']:
         cnt['S'] += 1
         sec_id = get_virtual_date_id(unit_num, 'S', cnt['S'])
@@ -50,108 +47,119 @@ def generate_csv_final(json_filename):
             les_id = get_virtual_date_id(unit_num, 'L', cnt['L'])
             
             for page in lesson['pages']:
-                # Input ID
                 cnt['I'] += 1
                 input_id = get_virtual_date_id(unit_num, 'I', cnt['I'])
                 
-                # 行データ作成
-                row = {
-                    # 見本CSVのカラム順序や名前に依存せず、まずは辞書を作る
-                    # 実際の出力時にテンプレートの並びに合わせる
-                    'section_code': sec_id,
-                    'section_name': section['title'],
-                    'section_status': section.get('status', 'public'),
-                    
-                    'lesson_code': les_id,
-                    'lesson_name': lesson['title'],
-                    'lesson_status': lesson.get('status', 'public'),
-                    
-                    'input_code': input_id,
-                    'input_page_no': page['page_no'],
-                    'input_type': page.get('type', 'normal'),
-                    'input_body': page['input'].get('body', ''),
-                    'input_supplement': page['input'].get('supplement', ''),
-                    
-                    'input_question': page['input'].get('question_text', ''),
-                    'input_options': ';'.join(page['input'].get('options', [])),
-                    'input_correct': page['input'].get('correct_option', ''),
-                    'input_comment': page['input'].get('result_comment', ''),
-                }
+                # 行データの初期化（全項目を空文字で埋める）
+                row = {}
                 
-                # Quiz処理
+                # 1. Section Info
+                row['section_code'] = sec_id
+                row['section_name'] = section['title']
+                row['section_status'] = section.get('status', 'public')
+                row['section_published_at'] = '' # 空欄
+                
+                # 2. Lesson Info
+                row['lesson_code'] = les_id
+                row['lesson_pattern'] = '' # 空欄
+                row['lesson_name'] = lesson['title']
+                row['lesson_teaser'] = '' # 予告（なければ空欄）
+                row['lesson_tags'] = ''   # タグ
+                row['lesson_status'] = lesson.get('status', 'public')
+                row['lesson_published_at'] = ''
+                
+                # 3. Input Info
+                row['input_code'] = input_id
+                row['input_page_no'] = page['page_no']
+                row['input_type'] = page.get('type', 'input_quiz')
+                row['input_body_text'] = page['input'].get('body', '')
+                row['input_image_url'] = ''
+                row['input_supplement_text'] = page['input'].get('supplement', '')
+                
+                # 4. Input Quiz Info
+                row['input_question_text'] = page['input'].get('question_text', '')
+                row['input_question_image_url'] = ''
+                row['input_question_type'] = '2_choice' if row['input_question_text'] else '' # 仮
+                # 選択肢はリストなら結合、文字列ならそのまま
+                opts = page['input'].get('options', [])
+                row['input_question_choices'] = ';'.join(opts) if isinstance(opts, list) else opts
+                
+                row['input_question_correct'] = page['input'].get('correct_option', '')
+                row['input_correct_explanation'] = page['input'].get('result_comment', '')
+                row['input_wrong_explanation'] = ''
+                
+                # 5. Quiz Info
                 quiz_data = page.get('quiz')
                 if quiz_data:
                     cnt['Q'] += 1
                     quiz_id = get_virtual_date_id(unit_num, 'Q', cnt['Q'])
                     
                     row['quiz_code'] = quiz_id
+                    row['quiz_page_no'] = '' # 必要なら埋める
                     row['quiz_type'] = quiz_data.get('type', '4_choice')
-                    row['quiz_question'] = quiz_data.get('question', '')
-                    row['quiz_options'] = ';'.join(quiz_data.get('options', []))
+                    row['quiz_question_text'] = quiz_data.get('question', '')
+                    row['quiz_image_url'] = ''
+                    
+                    q_opts = quiz_data.get('options', [])
+                    row['quiz_choices'] = ';'.join(q_opts) if isinstance(q_opts, list) else q_opts
+                    
                     row['quiz_correct'] = quiz_data.get('correct_value', '')
-                    row['quiz_explanation'] = quiz_data.get('explanation', '')
+                    row['quiz_pair_1'] = ''
+                    row['quiz_pair_2'] = ''
+                    row['quiz_pair_3'] = ''
+                    row['quiz_pair_4'] = ''
+                    row['quiz_correct_explanation'] = quiz_data.get('explanation', '')
+                    row['quiz_wrong_explanation'] = ''
+                    row['quiz_result_explanation'] = ''
                 else:
-                    # 空白埋め
-                    row['quiz_code'] = ''
-                    row['quiz_type'] = ''
-                    row['quiz_question'] = ''
-                    row['quiz_options'] = ''
-                    row['quiz_correct'] = ''
-                    row['quiz_explanation'] = ''
+                    # クイズなしの場合もキーは必要
+                    for k in ['quiz_code', 'quiz_page_no', 'quiz_type', 'quiz_question_text',
+                              'quiz_image_url', 'quiz_choices', 'quiz_correct', 'quiz_pair_1',
+                              'quiz_pair_2', 'quiz_pair_3', 'quiz_pair_4', 'quiz_correct_explanation',
+                              'quiz_wrong_explanation', 'quiz_result_explanation']:
+                        row[k] = ''
 
                 rows.append(row)
 
-    # 3. CSV出力処理（テンプレート活用）
+    # --- CSV出力 ---
     
-    # 出力ファイルパス
-    output_filename = f"unit{str(unit_num).zfill(2)}.csv"
-    output_path = os.path.join(OUTPUT_DIR, output_filename)
-    
-    # 手順A: テンプレートをコピーして出力ファイルを作成（これでヘッダー1-2行目は完璧）
-    if not os.path.exists(TEMPLATE_FILE):
-        print("エラー: テンプレートファイルが見つかりません。templates/header_template.csv を配置してください。")
-        return
-        
-    shutil.copy(TEMPLATE_FILE, output_path)
-    
-    # 手順B: テンプレートから「カラム名」を取得する（3行目の列マッピングのため）
-    # ヘッダーが2行あるので、pandasで読むときは工夫が必要だが、
-    # ここでは「見本CSV」のカラム順序が固定であると仮定し、コード内で定義したリスト順で書き込むのが安全。
-    
-    # ※重要: ここのリストは、実際のheader_template.csvの並び順と完全に一致させる必要があります！
-    # CSV見本ファイルを開いて、A列から順に確認してください。
+    # 実際のCSVヘッダー順序（全38列）
+    # ここが実際のファイルと一致していないとズレます
     column_order = [
-        'section_code', 'section_name', 'section_status', # A, B, C
-        'lesson_code', 'lesson_name', 'lesson_status',    # D, E, F
-        'input_code', 'input_page_no', 'input_type',      # G, H, I
-        'input_body', 'input_supplement',                 # J, K
-        'input_question', 'input_options', 'input_correct', 'input_comment', # L, M, N, O
-        'quiz_code', 'quiz_type', 'quiz_question', 'quiz_options', 'quiz_correct', 'quiz_explanation' # P~
+        'section_code', 'section_name', 'section_status', 'section_published_at',
+        'lesson_code', 'lesson_pattern', 'lesson_name', 'lesson_teaser', 'lesson_tags', 'lesson_status', 'lesson_published_at',
+        'input_code', 'input_page_no', 'input_type', 'input_body_text', 'input_image_url', 'input_supplement_text',
+        'input_question_text', 'input_question_image_url', 'input_question_type', 'input_question_choices', 'input_question_correct', 'input_correct_explanation', 'input_wrong_explanation',
+        'quiz_code', 'quiz_page_no', 'quiz_type', 'quiz_question_text', 'quiz_image_url', 'quiz_choices', 'quiz_correct',
+        'quiz_pair_1', 'quiz_pair_2', 'quiz_pair_3', 'quiz_pair_4',
+        'quiz_correct_explanation', 'quiz_wrong_explanation', 'quiz_result_explanation'
     ]
     
     df = pd.DataFrame(rows)
     
-    # 存在しない列を補完
+    # 存在しないカラムを空文字で埋める
     for col in column_order:
         if col not in df.columns:
             df[col] = ''
             
-    # 並び順をテンプレートに合わせる
     df_sorted = df[column_order]
     
-    # 手順C: 追記モード('a')で書き込み。ヘッダーは書かない(header=False)
-    df_sorted.to_csv(output_path, mode='a', index=False, header=False, encoding='utf-8-sig')
+    output_filename = f"unit{str(unit_num).zfill(2)}.csv"
+    output_path = os.path.join(OUTPUT_DIR, output_filename)
     
-    print(f"✅ 変換完了: {output_filename} (ID日付: 2501{str(unit_num).zfill(2)})")
+    # テンプレートを使用（ヘッダー1-2行目）
+    if os.path.exists(TEMPLATE_FILE):
+        shutil.copy(TEMPLATE_FILE, output_path)
+        # 追記モード
+        df_sorted.to_csv(output_path, mode='a', index=False, header=False, encoding='utf-8-sig', quoting=csv.QUOTE_ALL)
+    else:
+        # テンプレートがない場合はヘッダー付きで出力（カラム名行のみになるが）
+        print("警告: テンプレートが見つかりません。カラム名ヘッダーのみで出力します。")
+        df_sorted.to_csv(output_path, index=False, encoding='utf-8-sig', quoting=csv.QUOTE_ALL)
+        
+    print(f"✅ 変換完了: {output_filename} (全{len(column_order)}列)")
 
 if __name__ == "__main__":
-    # 実行例: unit01.json が drafts_json フォルダにある場合
-    # 全ファイルを変換したい場合は os.listdir でループさせると良い
-    
     target_files = [f for f in os.listdir(INPUT_DIR) if f.endswith('.json')]
-    
-    if not target_files:
-        print("変換対象のJSONファイルが data/drafts_json/ にありません。")
-    else:
-        for json_file in target_files:
-            generate_csv_final(json_file)
+    for json_file in target_files:
+        generate_csv_final(json_file)
