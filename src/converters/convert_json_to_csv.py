@@ -4,11 +4,11 @@ import os
 import shutil
 
 # --- 設定 ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # src/
-PROJECT_ROOT = os.path.dirname(BASE_DIR)              # root/
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # src/converters/
+PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR)) # root/
 
 INPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'drafts_json')
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'output_csv')
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'output_csv')
 TEMPLATE_FILE = os.path.join(PROJECT_ROOT, 'templates', 'header_template.csv')
 
 def get_virtual_date_id(unit_num, prefix, counter):
